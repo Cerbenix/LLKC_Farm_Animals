@@ -1,10 +1,13 @@
-import React from 'react';
+import React from "react";
+import useAuthContext from "../context/AuthContext";
+
 
 const Home: React.FC = () => {
+  const { user } = useAuthContext();
+
   return (
-    <div>
-      <h1 className='bg-slate-500 text-sm'>Welcome to the Home Page</h1>
-      <p>This is the content of the Home component.</p>
+    <div className="flex justify-center mt-10">
+      <h1 className="text-5xl">Welcome {user?.name}</h1>
     </div>
   );
 };
