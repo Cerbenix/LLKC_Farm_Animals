@@ -6,8 +6,9 @@ import Header from "./components/Header";
 import AuthLayout from "./layouts/AuthLayout";
 import GuestLayout from "./layouts/GuestLayout";
 import FarmsIndex from "./views/FarmIndex";
-import FarmEdit from "./views/FarmEdit";
-import FarmCreate from "./views/FarmCreate";
+
+import AnimalsIndex from "./views/AnimalIndex";
+import FarmShow from "./views/FarmShow";
 
 function App() {
 
@@ -18,8 +19,8 @@ function App() {
                 <Route element={<AuthLayout />}>
                     <Route path="/" element={<Home />} />
                     <Route path="/farms" element={<FarmsIndex />} />
-                    <Route path="/farms/:id/edit" element={<FarmEdit />} />
-                    <Route path="/farms/create" element={<FarmCreate />} />
+                    <Route path="/farms/:farmId" element={<FarmShow />} />
+                    <Route path="/animals" element={<AnimalsIndex />} />
                 </Route>
                 <Route element={<GuestLayout />}>
                     <Route path="/login" element={<Login />} />

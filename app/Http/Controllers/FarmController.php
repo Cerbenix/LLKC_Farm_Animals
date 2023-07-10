@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Farm;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -16,10 +17,12 @@ class FarmController extends Controller
 
     public function store(Request $request)
     {
+        $regex = '/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/';
+
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
             'email' => 'nullable|email',
-            'website' => 'nullable|url',
+            'website' => 'nullable|regex:'.$regex,
         ]);
 
         if ($validator->fails()) {
@@ -33,7 +36,7 @@ class FarmController extends Controller
 
     public function show($id)
     {
-        $farm = Auth::user()->farms()->findOrFail($id);
+        $farm = Farm::findOrFail($id);
         return response()->json($farm);
     }
 
@@ -49,8 +52,12 @@ class FarmController extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        $farm = Auth::user()->farms()->findOrFail($id);
-        $farm->update($request->only('name', 'email', 'website'));
+        $farm = Farm::findOrFail($id);
+        $farm->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'website' => $request->website,
+        ]);
 
         return response()->json($farm);
     }

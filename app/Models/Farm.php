@@ -15,4 +15,9 @@ class Farm extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function animals()
+    {
+        return $this->hasMany(Animal::class);
+    }
 }

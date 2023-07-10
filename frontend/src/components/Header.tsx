@@ -14,8 +14,8 @@ const Header: React.FC = () => {
                 {user ? (
                     <div className="flex flex-col sm:flex-row">
                         <Link href="/farms">My Farms</Link>
-                        <Link href="/farms/create">Add Farm</Link>
-                        <button className="hover:text-red-500 font-bold mx-3" onClick={logout}> Logout </button>
+                        <Link href="/animals">My Animals</Link>
+                        <button className="hover:text-red-500 font-bold mr-5" onClick={logout}> Logout </button>
                     </div>
                 ) : (
                     <div className="flex flex-col sm:flex-row">

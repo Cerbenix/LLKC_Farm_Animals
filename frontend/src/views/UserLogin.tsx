@@ -3,8 +3,8 @@ import Error from "../components/Error";
 import useAuthContext from "../context/AuthContext";
 
 interface LoginFormData {
-  email: string;
-  password: string;
+    email: string;
+    password: string;
 }
 
 const UserLogin: React.FC = () => {
@@ -27,7 +27,7 @@ const UserLogin: React.FC = () => {
     };
 
     return (
-        <div className="container mx-auto py-8">
+        <div className="w-1/3 mx-auto my-8 p-8 border-2 rounded-lg bg-gray-50">
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label">
@@ -55,15 +55,15 @@ const UserLogin: React.FC = () => {
                     />
                     {errors.password && <Error>{errors.password}</Error>}
                 </div>
-                <div>
-                <span>Don't have an account? </span><a className="font-medium" href="/register">Click here to register</a>
+                <div className="mb-2">
+                    <span>Don't have an account? </span>
+                    <a className="font-medium" href="/register">
+                        Click here to register
+                    </a>
                 </div>
                 <div>
-                    <button type="submit" className="btn btn-primary">
-                        Login
-                    </button>
+                    <button className="btn btn-primary">Login</button>
                 </div>
-                
             </form>
         </div>
     );
