@@ -38,16 +38,16 @@ const AnimalForm: React.FC<AnimalFormProps> = ({
 
     useEffect(() => {
         if (initialData) {
-          setFormData(initialData);
+            setFormData(initialData);
         } else {
-          setFormData({
-            id: 0,
-            animal_number: "",
-            type_name: "",
-            years: null,
-          });
+            setFormData({
+                id: 0,
+                animal_number: "",
+                type_name: "",
+                years: null,
+            });
         }
-      }, [initialData]);
+    }, [initialData]);
 
     const [errors, setErrors] = useState<Errors>({});
 

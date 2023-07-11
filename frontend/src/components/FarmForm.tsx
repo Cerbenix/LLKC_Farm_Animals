@@ -25,7 +25,6 @@ const FarmForm: React.FC<FarmFormProps> = ({
     isEdit = false,
     onCancel,
 }) => {
-    
     const [formData, setFormData] = useState<Farm>(
         initialData || {
             id: 0,
@@ -37,16 +36,16 @@ const FarmForm: React.FC<FarmFormProps> = ({
 
     useEffect(() => {
         if (initialData) {
-          setFormData(initialData);
+            setFormData(initialData);
         } else {
-          setFormData({
-            id: 0,
-            name: "",
-            email: "",
-            website: "",
-          });
+            setFormData({
+                id: 0,
+                name: "",
+                email: "",
+                website: "",
+            });
         }
-      }, [initialData]);
+    }, [initialData]);
 
     const [errors, setErrors] = useState<Errors>({});
 

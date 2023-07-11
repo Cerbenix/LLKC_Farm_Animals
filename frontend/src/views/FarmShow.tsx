@@ -126,7 +126,9 @@ const FarmShow: React.FC = () => {
                 <tbody>
                     {animals.map((animal) => (
                         <tr key={animal.id}>
-                            <td className="font-medium align-middle">{animal.type_name}</td>
+                            <td className="font-medium align-middle">
+                                {animal.type_name}
+                            </td>
                             <td className="align-middle">
                                 {animal.animal_number}
                             </td>

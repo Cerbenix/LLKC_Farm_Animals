@@ -6,12 +6,10 @@ import Header from "./components/Header";
 import AuthLayout from "./layouts/AuthLayout";
 import GuestLayout from "./layouts/GuestLayout";
 import FarmsIndex from "./views/FarmIndex";
-
 import AnimalsIndex from "./views/AnimalIndex";
 import FarmShow from "./views/FarmShow";
 
 function App() {
-
     return (
         <div>
             <Header />

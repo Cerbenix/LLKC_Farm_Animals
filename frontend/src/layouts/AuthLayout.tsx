@@ -2,9 +2,9 @@ import { Navigate, Outlet } from "react-router-dom";
 import useAuthContext from "../context/AuthContext";
 
 const AuthLayout = () => {
-    const { user } = useAuthContext()
+    const { user } = useAuthContext();
 
-    return user ? <Outlet /> : <Navigate to="/login" />
-}
+    return user ? <Outlet /> : <Navigate to="/login" />;
+};
 
 export default AuthLayout;

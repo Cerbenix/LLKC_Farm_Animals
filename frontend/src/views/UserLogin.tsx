@@ -27,7 +27,7 @@ const UserLogin: React.FC = () => {
     };
 
     return (
-        <div className="w-1/3 mx-auto my-8 p-8 border-2 rounded-lg bg-gray-50">
+        <div className="w-11/12 mx-auto my-8 p-8 border-2 rounded-lg bg-gray-50 md:w-4/6 lg:w-1/3">
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label">

@@ -12,10 +12,16 @@ const Header: React.FC = () => {
             </a>
             <nav className="flex flex-col sm:flex-row">
                 {user ? (
-                    <div className="flex flex-col sm:flex-row">
+                    <div className="flex flex-col sm:flex-row sm:mt-5">
                         <Link href="/farms">My Farms</Link>
                         <Link href="/animals">My Animals</Link>
-                        <button className="hover:text-red-500 font-bold mr-5" onClick={logout}> Logout </button>
+                        <button
+                            className="hover:text-red-500 font-bold mr-5"
+                            onClick={logout}
+                        >
+                            {" "}
+                            Logout{" "}
+                        </button>
                     </div>
                 ) : (
                     <div className="flex flex-col sm:flex-row">

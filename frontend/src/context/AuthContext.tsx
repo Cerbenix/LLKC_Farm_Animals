@@ -167,7 +167,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         <AuthContext.Provider
             value={{ user, errors, getUser, login, register, logout }}
         >
-            {loading ? <div></div> : children}
+            {loading ? (
+                <div className="flex justify-center items-center h-screen">
+                    <div className="spinner-border" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            ) : (
+                children
+            )}
         </AuthContext.Provider>
     );
 };
