@@ -9,7 +9,7 @@ class Farm extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'email', 'website'];
+    protected $fillable = ['name', 'email', 'website, user_id'];
 
     public function user()
     {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Error from "../components/Error";
 
 interface Animal {
@@ -35,6 +35,20 @@ const AnimalForm: React.FC<AnimalFormProps> = ({
             years: null,
         }
     );
+
+    useEffect(() => {
+        if (initialData) {
+          setFormData(initialData);
+        } else {
+          setFormData({
+            id: 0,
+            animal_number: "",
+            type_name: "",
+            years: null,
+          });
+        }
+      }, [initialData]);
+
     const [errors, setErrors] = useState<Errors>({});
 
     const handleInputChange = (

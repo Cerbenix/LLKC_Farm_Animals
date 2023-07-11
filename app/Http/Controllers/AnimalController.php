@@ -8,8 +8,6 @@ use App\Models\Animal;
 use App\Models\Farm;
 use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\Validator;
-
 class AnimalController extends Controller
 {
     public function index()
