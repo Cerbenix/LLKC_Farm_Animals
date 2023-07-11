@@ -1,4 +1,6 @@
 # LLKC-Farm-Animals
+[![Dynamic XML Badge](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2FCerbenix%2FLLKC_Farm_Animals%2Fmaster%2Fcoverage-report%2Findex.html&query=%2F%2Ftr%5B1%5D%2Ftd%5B%40class%3D'warning%20big'%5D%5B1%5D%2Fdiv%5B%40class%3D'progress'%5D%5B1%5D%2Fdiv%5B%40class%3D'progress-bar%20bg-warning'%5D%5B1%5D%2F%40aria-valuenow&suffix=%25&label=Coverage)](https://raw.githack.com/Cerbenix/LLKC_Farm_Animals/master/coverage-report/index.html)
+
 ## Description
 
 LLKC test assignment - Farm Animals
