@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./views/Home";
 import Login from "./views/UserLogin";
 import Register from "./views/UserRegister";
@@ -25,8 +25,8 @@ function App() {
                 <Route element={<GuestLayout />}>
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
-                    
                 </Route>
+                <Route path="*" element={<Navigate to="/" />} />
             </Routes>
         </div>
     );

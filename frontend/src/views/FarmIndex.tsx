@@ -3,6 +3,7 @@ import axios from "../api/axios";
 
 import Link from "../components/Link";
 import FarmForm from "../components/FarmForm";
+import { useNavigate } from "react-router-dom";
 
 interface Farm {
   id: number;
@@ -23,10 +24,24 @@ const FarmIndex: React.FC = () => {
   const [lastPage, setLastPage] = useState(1);
   const [selectedFarm, setSelectedFarm] = useState<Farm | undefined>(undefined);
   const [isEditing, setIsEditing] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchFarms();
   }, [currentPage]);
+
+  useEffect(() => {
+    if (showAlert) {
+      const timer = setTimeout(() => {
+        setShowAlert(false);
+      }, 3000);
+
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+  }, [showAlert]);
 
   const fetchFarms = async () => {
     try {
@@ -39,6 +54,7 @@ const FarmIndex: React.FC = () => {
       setLastPage(response.data.last_page);
     } catch (error) {
       console.error("Failed to fetch farms:", error);
+      handleApiError(error);
     }
   };
 
@@ -71,6 +87,7 @@ const FarmIndex: React.FC = () => {
       fetchFarms();
     } catch (error) {
       console.error(`Failed to delete farm with ID ${id}:`, error);
+      handleApiError(error);
     }
   };
 
@@ -78,8 +95,10 @@ const FarmIndex: React.FC = () => {
     try {
       await axios.post("/api/farms", data);
       fetchFarms();
+      setShowAlert(true);
     } catch (error) {
       console.error("Failed to add farm:", error);
+      handleApiError(error);
     }
   };
 
@@ -91,14 +110,27 @@ const FarmIndex: React.FC = () => {
       setIsEditing(false);
     } catch (error) {
       console.error(`Failed to update farm with ID ${data.id}:`, error);
+      handleApiError(error);
     }
   };
+
+  const handleApiError = (error: any) => {
+    if (error.response && error.response.status === 401) {
+        navigate("/");
+    }
+};
 
   return (
     <div className="container">
       <div className="text-center my-4">
         <h1 className="fw-bold display-4">My Farms</h1>
       </div>
+
+      {showAlert && (
+        <div className="alert alert-success" role="alert">
+          Farm created successfully!
+        </div>
+      )}
 
       <table className="table table-striped table-hover">
         <thead className="table-dark">

@@ -101,6 +101,26 @@ const AnimalForm: React.FC<AnimalFormProps> = ({
             <div className="container">
                 <div className="container flex flex-row items-center">
                     <label
+                        htmlFor="type_name"
+                        className="whitespace-nowrap mr-3"
+                    >
+                        Type:
+                    </label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="type_name"
+                        name="type_name"
+                        value={formData.type_name}
+                        onChange={handleInputChange}
+                    />
+                </div>
+                {errors.type_name && <Error>{errors.type_name}</Error>}
+            </div>
+
+            <div className="container">
+                <div className="container flex flex-row items-center">
+                    <label
                         htmlFor="animal_number"
                         className="whitespace-nowrap mr-3"
                     >
@@ -118,25 +138,6 @@ const AnimalForm: React.FC<AnimalFormProps> = ({
                 {errors.animal_number && <Error>{errors.animal_number}</Error>}
             </div>
 
-            <div className="container">
-                <div className="container flex flex-row items-center">
-                    <label
-                        htmlFor="type_name"
-                        className="whitespace-nowrap mr-3"
-                    >
-                        Type:
-                    </label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="type_name"
-                        name="type_name"
-                        value={formData.type_name}
-                        onChange={handleInputChange}
-                    />
-                </div>
-                {errors.type_name && <Error>{errors.type_name}</Error>}
-            </div>
             <div className="container">
                 <div className="container flex flex-row items-center">
                     <label htmlFor="years" className="whitespace-nowrap mr-3">

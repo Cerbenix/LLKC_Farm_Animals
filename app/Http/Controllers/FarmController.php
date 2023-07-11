@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreFarmRequest;
+use App\Http\Requests\UpdateFarmRequest;
 use App\Models\Farm;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,21 +17,13 @@ class FarmController extends Controller
         return response()->json($farms);
     }
 
-    public function store(Request $request)
+    public function store(StoreFarmRequest $request)
     {
-        $regex = '/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/';
-
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string',
-            'email' => 'nullable|email',
-            'website' => 'nullable|regex:'.$regex,
+        $farm = Auth::user()->farms()->create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'website' => $request->website,
         ]);
-
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
-
-        $farm = Auth::user()->farms()->create($request->only('name', 'email', 'website'));
 
         return response()->json($farm, 201);
     }
@@ -40,19 +34,10 @@ class FarmController extends Controller
         return response()->json($farm);
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateFarmRequest $request, $id)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string',
-            'email' => 'nullable|email',
-            'website' => 'nullable|url',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
-
         $farm = Farm::findOrFail($id);
+
         $farm->update([
             'name' => $request->name,
             'email' => $request->email,
