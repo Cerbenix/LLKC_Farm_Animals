@@ -10,8 +10,7 @@ class VerifyAnimalOwner
 {
     public function handle(Request $request, Closure $next)
     {
-        $animalId = $request->route('animal_id');
-        $animal = Animal::findOrFail($animalId);
+        $animal = $request->route('animal');
 
         if ($animal->farm->user_id !== auth()->user()->id) {
             return response()->json(['error' => 'Unauthorized'], 401);

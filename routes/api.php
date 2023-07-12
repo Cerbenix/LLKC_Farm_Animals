@@ -18,6 +18,6 @@ Route::middleware(['auth:sanctum', 'auth.farmowner'])
 Route::middleware(['auth:sanctum', 'auth.farmowner'])
     ->post('farms/{farm}/animals', [\App\Http\Controllers\AnimalController::class, 'store']);
 Route::middleware(['auth:sanctum', 'auth.animalowner'])
-    ->put('animals/{animal_id}', [\App\Http\Controllers\AnimalController::class, 'update']);
+    ->put('animals/{animal}', [\App\Http\Controllers\AnimalController::class, 'update']);
 Route::middleware(['auth:sanctum', 'auth.animalowner'])
-    ->delete('animals/{animal_id}', [\App\Http\Controllers\AnimalController::class, 'destroy']);
+    ->delete('animals/{animal}', [\App\Http\Controllers\AnimalController::class, 'destroy']);

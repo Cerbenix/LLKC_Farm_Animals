@@ -5,17 +5,19 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreFarmRequest;
 use App\Http\Requests\UpdateFarmRequest;
 use App\Models\Farm;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 
 class FarmController extends Controller
 {
-    public function index()
+    public function index(): JsonResponse
     {
         $farms = Auth::user()->farms()->paginate(10);
+
         return response()->json($farms);
     }
 
-    public function store(StoreFarmRequest $request)
+    public function store(StoreFarmRequest $request): JsonResponse
     {
         $farm = Auth::user()->farms()->create([
             'name' => $request->name,
@@ -26,16 +28,13 @@ class FarmController extends Controller
         return response()->json($farm, 201);
     }
 
-    public function show($id)
+    public function show(Farm $farm): JsonResponse
     {
-        $farm = Farm::findOrFail($id);
         return response()->json($farm);
     }
 
-    public function update(UpdateFarmRequest $request, $id)
+    public function update(UpdateFarmRequest $request, Farm $farm): JsonResponse
     {
-        $farm = Farm::findOrFail($id);
-
         $farm->update([
             'name' => $request->name,
             'email' => $request->email,
@@ -45,9 +44,8 @@ class FarmController extends Controller
         return response()->json($farm);
     }
 
-    public function destroy($id)
+    public function destroy(Farm $farm): JsonResponse
     {
-        $farm = Auth::user()->farms()->findOrFail($id);
         $farm->delete();
 
         return response()->json(null, 204);

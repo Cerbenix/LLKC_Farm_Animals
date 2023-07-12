@@ -6,18 +6,19 @@ use App\Http\Requests\StoreAnimalRequest;
 use App\Http\Requests\UpdateAnimalRequest;
 use App\Models\Animal;
 use App\Models\Farm;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class AnimalController extends Controller
 {
-    public function index()
+    public function index(): JsonResponse
     {
         $user = auth()->user();
         $animals = $user->animals()->paginate(10);
+
         return response()->json($animals);
     }
 
-    public function store(StoreAnimalRequest $request)
+    public function store(StoreAnimalRequest $request): JsonResponse
     {
         $farmId = $request->farm;
         $animalCount = Animal::where('farm_id', $farmId)->count();
@@ -43,17 +44,15 @@ class AnimalController extends Controller
         return response()->json($animal, 201);
     }
 
-    public function show(Request $request)
+    public function show(Farm $farm): JsonResponse
     {
-        $farm = Farm::findOrFail($request->farm);
         $animals = $farm->animals()->get();
+
         return response()->json($animals);
     }
 
-    public function update(UpdateAnimalRequest $request, $id)
+    public function update(UpdateAnimalRequest $request, Animal $animal): JsonResponse
     {
-        $animal = Animal::findOrFail($id);
-
         $animal->update([
             'animal_number' => $request->animal_number,
             'type_name' => $request->type_name,
@@ -63,10 +62,10 @@ class AnimalController extends Controller
         return response()->json($animal);
     }
 
-    public function destroy($id)
+    public function destroy(Animal $animal): JsonResponse
     {
-        $animal = Animal::findOrFail($id);
         $animal->delete();
+
         return response()->json(null, 204);
     }
 }

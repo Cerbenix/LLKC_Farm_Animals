@@ -10,13 +10,10 @@ class VerifyFarmOwner
 {
     public function handle(Request $request, Closure $next)
     {
-        if ($request->route('farm')) {
-            $farmId = $request->route('farm');
-            $farm = Farm::findOrFail($farmId);
+        $farm = $request->route('farm');
 
-            if ($farm->user_id !== auth()->user()->id) {
-                return response()->json(['message' => 'Unauthorized'], 401);
-            }
+        if ($farm && $farm->user_id !== auth()->user()->id) {
+            return response()->json(['message' => 'Unauthorized'], 401);
         }
 
         return $next($request);
